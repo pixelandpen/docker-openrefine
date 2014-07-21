@@ -12,6 +12,11 @@ RUN add-apt-repository 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu pre
 # a mounted file systems table to make MySQL happy
 #RUN cat /proc/mounts > /etc/mtab
 
+# Accept the oracle java7 license and set some mysql config
+RUN debconf-set-selections <<< 'oracle-java7-installer shared/accepted-oracle-license-v1-1 select true'
+RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password password 18473TYG'
+RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 18473TYG'
+
 # Install gdal dependencies provided by Ubuntu repositories
 RUN apt-get install -y -q \
     mysql-server \
