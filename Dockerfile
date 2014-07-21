@@ -3,17 +3,16 @@ FROM ubuntu:trusty
 MAINTAINER: giuliano.tortoreto@outlook.com
 
 RUN apt-get -y -q update
-#download and install java
-RUN apt-get -y -q install wget make ant g++ software-properties-common
 
-RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections ; echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+RUN apt-get -y -q install wget make ant g++ software-properties-common
 RUN add-apt-repository 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main'; apt-get update -y -q; apt-get install -y --force-yes -q oracle-java7-installer
 
 # a mounted file systems table to make MySQL happy
 #RUN cat /proc/mounts > /etc/mtab
 
 # Accept the oracle java7 license and set some mysql config
-RUN debconf-set-selections <<< 'oracle-java7-installer shared/accepted-oracle-license-v1-1 select true'
+RUN debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 select true'
+RUN debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 seen true'
 RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password password 18473TYG'
 RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 18473TYG'
 
