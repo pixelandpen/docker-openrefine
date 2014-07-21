@@ -2,19 +2,19 @@ FROM ubuntu:trusty
 
 MAINTAINER: giuliano.tortoreto@outlook.com
 
-RUN apt-get -y -q update
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
+RUN add-apt-repository 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main'; \
+    apt-get -y -q update
+    
 # Accept the oracle java7 license and set some mysql config
 RUN echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
 RUN echo mysql-server mysql-server/root_password password 18473TYG | /usr/bin/debconf-set-selections
 RUN echo mysql-server mysql-server/root_password_again password 18473TYG | /usr/bin/debconf-set-selections
 
-
 RUN apt-get -y -q install wget make ant g++ software-properties-common
-RUN add-apt-repository 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main'; \
-    apt-get install -y --force-yes -q oracle-java7-installer
+RUN apt-get install -y --force-yes -q oracle-java7-installer
 
 # a mounted file systems table to make MySQL happy
 #RUN cat /proc/mounts > /etc/mtab
