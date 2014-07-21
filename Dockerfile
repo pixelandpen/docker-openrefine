@@ -5,10 +5,10 @@ MAINTAINER: giuliano.tortoreto@outlook.com
 RUN apt-get -y -q update
 
 # Accept the oracle java7 license and set some mysql config
-RUN debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 select true'
-RUN debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 seen true'
-RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password password 18473TYG'
-RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 18473TYG'
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+RUN echo mysql-server mysql-server/root_password password 18473TYG | /usr/bin/debconf-set-selections
+RUN echo mysql-server mysql-server/root_password_again password 18473TYG | /usr/bin/debconf-set-selections
 
 
 RUN apt-get -y -q install wget make ant g++ software-properties-common
