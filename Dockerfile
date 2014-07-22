@@ -66,9 +66,6 @@ RUN cd ./proj-4.8.0; ./configure && make && make install
 RUN wget -O - --no-check-certificate https://github.com/OpenRefine/OpenRefine/archive/master.tar.gz | tar -xz
 RUN mv OpenRefine-master OpenRefine; cd ./OpenRefine ; ant clean build;
 
-EXPOSE 3333
-VOLUME ["/mnt/refine"]
-
 RUN apt-get install unzip;
 
 #download extensions
@@ -85,6 +82,8 @@ RUN cd /usr/local/lib; cp libproj.so libproj.a libproj.la libproj.so.0 libgeos.a
 #test gdal and geos
 #RUN cd ./gdal-1.11.0/swig/java; make test;
 
+ADD ./start.sh /start.sh
+RUN chmod +x /start.sh
 
-CMD ["OpenRefine/refine", "-i", "0.0.0.0", "-d", "/mnt/refine"]
-
+EXPOSE 3333
+CMD ["/start.sh"]
