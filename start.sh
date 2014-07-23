@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$REFINE_MEMORY" ] ; then
-    TOTAL_MEMORY=`grep MemTotal /proc/meminfo | awk '{print $2}'`
+    TOTAL_MEMORY=`free -b | grep Mem | awk '{print $2}'`
     REFINE_MEMORY=$(( $TOTAL_MEMORY * 6 / 10 ))
 fi
 
