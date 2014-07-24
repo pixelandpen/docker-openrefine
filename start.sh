@@ -5,4 +5,4 @@ if [ -z "$REFINE_MEMORY" ] ; then
     REFINE_MEMORY=$(( $TOTAL_MEMORY * 6 / 10 ))
 fi
 
-OpenRefine/refine -i 0.0.0.0 -d /mnt/refine -m $REFINE_MEMORY
+exec OpenRefine/refine -i 0.0.0.0 -d /mnt/refine -m $REFINE_MEMORY
