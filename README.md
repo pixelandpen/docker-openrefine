@@ -19,7 +19,7 @@ If you want refine projects to be persistent, you must mount `/mnt/refine` as fo
 
     docker run -p 80:3333 -v /path-to-host:/mnt/refine spaziodati/openrefine
 
-You can also increase the max size of the heam, by specifying the REFINE_MEMORY environment variable:
+You can also increase the max size of the heap, by specifying the REFINE_MEMORY environment variable:
 
     docker run -p 80:3333 -e REFINE_MEMORY=24G spaziodati/openrefine
 
