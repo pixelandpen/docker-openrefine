@@ -59,7 +59,7 @@ RUN wget -O - http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz | tar -xz
 RUN cd gdal-1.11.0 ; ./configure --with-xerces --with-java=/usr/lib/jvm/java-7-oracle --with-jvm-lib=/usr/lib/jvm/java-7-oracle/jre/lib/amd64/server --with-jvm-lib-add-rpath=yes --with-mdb=yes --with-geos=yes && make && make install; cd swig/java; make ; cp libgdalconstjni.so libgdaljni.so libogrjni.so libosrjni.so /usr/lib/; cd ../../.libs; cp libgdal.so /usr/lib
 
 #install proj
-RUN wget -O - http://download.osgeo.org/proj/proj-4.8.0.tar.gz | tar -xz 
+RUN wget -O - http://download.osgeo.org/proj/proj-4.8.0.tar.gz | tar -xz
 RUN cd ./proj-4.8.0; ./configure && make && make install
 
 # download and "mount" OpenRefine
@@ -72,7 +72,12 @@ RUN apt-get install unzip;
 RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.com/giTorto/extraCTU-plugin/archive/master.tar.gz | tar -xz; cd ./extraCTU-plugin-master; ant clean build
 RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.com/giTorto/geoXtension/archive/master.tar.gz | tar -xz; cp ./gdal-1.11.0/swig/java/gdal.jar ./geoXtension-master/module/MOD-INF/lib; cd ./geoXtension-master ; ant clean build
 RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.com/giTorto/Refine-NER-Extension/archive/master.tar.gz | tar -xz; cd Refine-NER-Extension-master; ant clean build
-RUN cd ./OpenRefine/extensions; wget https://github.com/downloads/fadmaa/grefine-rdf-extension/grefine-rdf-extension-0.8.0.zip; unzip grefine-rdf-extension-0.8.0.zip && rm grefine-rdf-extension-0.8.0.zip
+RUN cd ./OpenRefine/extensions; \
+    wget https://github.com/fadmaa/grefine-rdf-extension/archive/v0.9.0.zip; \
+    unzip v0.9.0.zip && rm v0.9.0.zip; \
+    mv grefine-rdf-extension-0.9.0 rdf-extension; \
+    cd ./rdf-extension; \
+    JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 
 #setting ldpath
 RUN echo "LD_LIBRARY_PATH=/usr/lib" >> ~/.bashrc && echo "export LD_LIBRARY_PATH" >> ~/.bashrc
