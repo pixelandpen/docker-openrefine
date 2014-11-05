@@ -73,9 +73,9 @@ RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.
 RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.com/giTorto/geoXtension/archive/master.tar.gz | tar -xz; cp ./gdal-1.11.0/swig/java/gdal.jar ./geoXtension-master/module/MOD-INF/lib; cd ./geoXtension-master ; ant clean build
 RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.com/giTorto/Refine-NER-Extension/archive/master.tar.gz | tar -xz; cd Refine-NER-Extension-master; ant clean build
 RUN cd ./OpenRefine/extensions; \
-    wget https://github.com/fadmaa/grefine-rdf-extension/archive/v0.9.0.zip; \
-    unzip v0.9.0.zip && rm v0.9.0.zip; \
-    mv grefine-rdf-extension-0.9.0 rdf-extension; \
+    wget -O rdf-extension.tar.gz https://github.com/SpazioDati/grefine-rdf-extension/tarball/export-stream; \
+    tar -xzf rdf-extension.tar.gz && rm rdf-extension.tar.gz; \
+    mv Spaziodati-grefine-rdf-extension-* rdf-extension; \
     cd ./rdf-extension; \
     JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 
