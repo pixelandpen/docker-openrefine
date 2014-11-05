@@ -75,7 +75,7 @@ RUN cd ./OpenRefine/extensions; wget -O - --no-check-certificate https://github.
 RUN cd ./OpenRefine/extensions; \
     wget -O rdf-extension.tar.gz https://github.com/SpazioDati/grefine-rdf-extension/tarball/export-stream; \
     tar -xzf rdf-extension.tar.gz && rm rdf-extension.tar.gz; \
-    mv Spaziodati-grefine-rdf-extension-* rdf-extension; \
+    mv SpazioDati-grefine-rdf-extension-* rdf-extension; \
     cd ./rdf-extension; \
     JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8' ant build
 
