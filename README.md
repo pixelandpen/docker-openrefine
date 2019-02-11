@@ -29,15 +29,15 @@ Run the docker container
 
 Running it is as simple as:
 
-    `docker run --name openrefine -p 80:3333 --rm pixelandpen/openrefine`
+    docker run --name openrefine -p 80:3333 --rm pixelandpen/openrefine
 
 If you want refine projects to be persistent, you must mount `/mnt/refine` as follows:
 
-    `docker run --name openrefine -p 80:3333 -v /path-to-host:/mnt/refine pixelandpen/openrefinei`
+    docker run --name openrefine -p 80:3333 -v /path-to-host:/mnt/refine pixelandpen/openrefine
 
 You can also increase the max size of the heap, by specifying the REFINE_MEMORY environment variable:
 
-    `docker run --name openrefine -p 80:3333 -e REFINE_MEMORY=24G pixelandpen/openrefine`
+    docker run --name openrefine -p 80:3333 -e REFINE_MEMORY=24G pixelandpen/openrefine
 
 [1]: https://registry.hub.docker.com/u/spaziodati/openrefine/
 [2]: https://github.com/OpenRefine/OpenRefine/
